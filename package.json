@@ -1,7 +1,7 @@
 {
   "name": "valantis",
   "version": "0.1.0",
-  "homepage": "https://aidagalimova.github.io/Valantis",
+  "homepage": "http://aidagalimova.github.io/Valantis",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.1",
