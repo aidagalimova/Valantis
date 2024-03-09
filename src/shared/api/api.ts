@@ -7,6 +7,7 @@ const axiosInstance = axios.create({
   headers: {
     "X-Auth": md5(`${process.env.REACT_APP_PASSWORD}${result}`),
     "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
   },
 });
 
