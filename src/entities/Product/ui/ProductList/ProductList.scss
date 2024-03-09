@@ -1,0 +1,29 @@
+.ProductList {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 16px;
+  overflow: hidden;
+  .listItem {
+    flex-basis: 24%;
+    @media (max-width: 1400px) {
+      flex-basis: 32%;
+    }
+    @media (max-width: 1181px) {
+      flex-basis: 49%;
+    }
+    @media (max-width: 927px) {
+      flex-basis: 100%;
+    }
+  }
+  .noProductText {
+    font-size: 24px;
+    color: #00d061;
+    font-weight: 500;
+  }
+}
+.loaderContainer {
+  text-align: center;
+  margin-top: 100px;
+}

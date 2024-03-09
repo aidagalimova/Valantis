@@ -1,0 +1,30 @@
+.ProductCard {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+  background-color: #343434;
+  height: 140px;
+  .price {
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 8px;
+    color: #00d061;
+  }
+  .title {
+    font-size: 18px;
+    font-weight: 400;
+    color: #fff;
+  }
+  .brand {
+    font-size: 16px;
+    font-weight: 300;
+    margin-bottom: 4px;
+    color: #fff;
+  }
+  .id {
+    font-size: 16px;
+    font-weight: 300;
+    color: #b3b3b3;
+  }
+}

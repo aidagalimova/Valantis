@@ -1,0 +1,41 @@
+.RangeInput {
+  .label {
+    color: #b3b3b3;
+    font-size: 16px;
+  }
+  .range {
+    display: flex;
+    flex-direction: row;
+  }
+  .inputWrapper {
+    position: relative;
+    width: fit-content;
+    .input {
+      border: 2px solid #343434;
+      outline: none;
+      background: #343434;
+      height: 36px;
+      font-size: 18px;
+      color: #00d061;
+      border-radius: 8px;
+      padding-left: 12px;
+      width: -webkit-fill-available;
+      margin-bottom: 8px;
+      padding-right: 32px;
+      &::placeholder {
+        color: #b3b3b3;
+      }
+    }
+    .rightIcon {
+      position: absolute;
+      color: #b3b3b3;
+      right: 8px;
+      cursor: pointer;
+      top: 10px;
+    }
+  }
+}
+
+input[type="range"] {
+  accent-color: #00d061;
+}

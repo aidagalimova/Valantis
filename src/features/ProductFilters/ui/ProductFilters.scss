@@ -1,0 +1,48 @@
+.FiltersForm {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  margin-bottom: 24px;
+  width: fit-content;
+  .filters {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    .filtersContainer {
+      display: flex;
+      flex-direction: row;
+      gap: 8px;
+    }
+    .nameInputContainer {
+      width: 300px;
+    }
+    .brandInputContainer {
+      width: 250px;
+    }
+  }
+}
+@media (max-width: 1080px) {
+  .FiltersForm {
+    flex-direction: column;
+  }
+}
+@media (max-width: 940px) {
+  .FiltersForm {
+    .filters {
+      flex-direction: column;
+      .nameInputContainer {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media (max-width: 590px) {
+  .FiltersForm {
+    .filters {
+      .filtersContainer {
+        flex-direction: column;
+      }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+.InputWrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+  .input {
+    border: 2px solid #343434;
+    outline: none;
+    width: 100%;
+    background: #343434;
+    height: 36px;
+    font-size: 18px;
+    color: #00d061;
+    border-radius: 8px;
+    padding-left: 32px;
+    padding-right: 32px;
+    &::placeholder {
+      color: #b3b3b3;
+    }
+  }
+  .searchIcon {
+    position: absolute;
+    color: #b3b3b3;
+    top: 4px;
+  }
+  .rightIcon {
+    position: absolute;
+    color: #b3b3b3;
+    right: 8px;
+    cursor: pointer;
+    top: 10px;
+  }
+}
