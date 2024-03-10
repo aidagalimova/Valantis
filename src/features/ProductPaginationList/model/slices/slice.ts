@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 const initialState = {
   offset: 0,
-  limit: 50,
+  limit: 100,
 };
 
 const productPaginationSlice = createSlice({

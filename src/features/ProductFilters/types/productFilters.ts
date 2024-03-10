@@ -1,4 +1,3 @@
-
 export interface ProductFiltersSchema {
   brands: { [key: string]: string } | null;
   prices: number[];
@@ -6,6 +5,7 @@ export interface ProductFiltersSchema {
   offset: number;
   limit: number;
   isLoading: boolean;
+  isFiltered: boolean;
   error: string;
 }
 export interface GetFieldResult {
@@ -25,7 +25,6 @@ export interface GetIdsRequest {
   limit?: number;
   offset?: number;
 }
-
 
 export interface FilterRequest {
   price?: number;

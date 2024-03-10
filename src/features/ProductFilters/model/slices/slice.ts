@@ -14,6 +14,7 @@ const initialState: ProductFiltersSchema = {
   prices: [],
   ids: null,
   isLoading: false,
+  isFiltered: false,
   error: "",
   offset: 0,
   limit: 51,
@@ -22,7 +23,11 @@ const initialState: ProductFiltersSchema = {
 const productFiltersSlice = createSlice({
   name: "productFilters",
   initialState,
-  reducers: {},
+  reducers: {
+    setIsFiltered: (state, action) => {
+      state.isFiltered = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     // GET BRANDS
     builder.addCase(
@@ -48,6 +53,7 @@ const productFiltersSlice = createSlice({
     builder.addCase(
       filterProducts.fulfilled,
       (state, action: PayloadAction<GetIdsResult>) => {
+        state.isFiltered = true;
         state.ids = new Set(action.payload.result);
       }
     );
@@ -85,4 +91,5 @@ const productFiltersSlice = createSlice({
   },
 });
 
+export const { setIsFiltered } = productFiltersSlice.actions;
 export default productFiltersSlice.reducer;

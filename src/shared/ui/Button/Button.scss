@@ -3,10 +3,10 @@
   padding: 8px 18px;
   display: flex;
   align-items: center;
-  background-color: #343434;
-  color: #00d061;
+  background-color: var(--secondary-bg-color);
+  color: var(--bright-color);
   border: none;
-  outline: 1px solid #00d061;
+  outline: 1px solid var(--bright-color);
   border-radius: 4px;
   height: 40px;
   font-size: 18px;

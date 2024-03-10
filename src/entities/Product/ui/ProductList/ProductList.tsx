@@ -3,7 +3,7 @@ import "./ProductList.scss";
 import { Product } from "entities/Product/model/types/product";
 
 interface ProductListProps {
-  products: Product[] | null;
+  products?: Product[] | null;
 }
 const ProductList = (props: ProductListProps) => {
 
@@ -12,7 +12,7 @@ const ProductList = (props: ProductListProps) => {
     <div className={"ProductList"}>
       {products?.length ? (
         products.map((product) => (
-          <div className={"listItem"} key={product.id}>
+          <div className={"productListItem"} key={product.id}>
             <ProductCard product={product} />
           </div>
         ))

@@ -3,28 +3,28 @@
   align-items: center;
   position: relative;
   .input {
-    border: 2px solid #343434;
+    border: 2px solid var(--secondary-bg-color);
     outline: none;
     width: 100%;
-    background: #343434;
+    background: var(--secondary-bg-color);
     height: 36px;
     font-size: 18px;
-    color: #00d061;
+    color: var(--bright-color);
     border-radius: 8px;
     padding-left: 32px;
     padding-right: 32px;
     &::placeholder {
-      color: #b3b3b3;
+      color: var(--secondary-color);
     }
   }
   .searchIcon {
     position: absolute;
-    color: #b3b3b3;
+    color: var(--secondary-color);
     top: 4px;
   }
   .rightIcon {
     position: absolute;
-    color: #b3b3b3;
+    color: var(--secondary-color);
     right: 8px;
     cursor: pointer;
     top: 10px;

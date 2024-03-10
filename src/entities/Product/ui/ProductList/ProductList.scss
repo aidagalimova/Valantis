@@ -4,8 +4,17 @@
   flex-wrap: wrap;
   justify-content: flex-start;
   gap: 16px;
-  overflow: hidden;
-  .listItem {
+  margin-bottom: 46px;
+  overflow: auto;
+  height: calc(100vh - 242px);
+  @media (max-width: 1081px) {
+    height: calc(100vh - 294px);
+  }
+  @media (max-width: 725px) {
+    overflow: hidden;
+    height: unset;
+  }
+  .productListItem {
     flex-basis: 24%;
     @media (max-width: 1400px) {
       flex-basis: 32%;
@@ -19,7 +28,7 @@
   }
   .noProductText {
     font-size: 24px;
-    color: #00d061;
+    color: var(--bright-color);
     font-weight: 500;
   }
 }

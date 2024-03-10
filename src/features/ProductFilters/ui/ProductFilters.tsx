@@ -9,6 +9,7 @@ import { filterProducts } from "../model/services/filterProducts";
 import { fetchPrices } from "../model/services/fetchPrices";
 import { SelectedPrice } from "../types/productFilters";
 import { fetchProductIds } from "../model/services/fetchProductIds";
+import { setIsFiltered } from "../model/slices/slice";
 const ProductFilters = () => {
   const { brands, prices } = useAppSelector(
     (state: RootState) => state.productFilters
@@ -19,7 +20,7 @@ const ProductFilters = () => {
     null
   );
   const [selectedName, setSelectedName] = useState("");
-  
+
   useEffect(() => {
     dispatch(fetchPrices());
     dispatch(fetchBrands());
@@ -39,6 +40,7 @@ const ProductFilters = () => {
 
   const handleProductsFilter = () => {
     if (!selectedBrand && !selectedName && !selectedPrice?.value) {
+      dispatch(setIsFiltered(false));
       dispatch(fetchProductIds({ offset: 0, limit: 50 }));
     } else {
       dispatch(
@@ -52,40 +54,42 @@ const ProductFilters = () => {
   };
 
   return (
-    <div className="FiltersForm">
-      <div className="filters">
-        <div className="nameInputContainer">
-          <SearchInput
-            value={selectedName}
-            onChange={(value) => handleNameInput(value)}
-            className="nameInput"
-            placeholder="Поиск по названию"
-          />
-        </div>
-        <div className="filtersContainer">
-          <div className="brandInputContainer">
-            <SelectorInput
-              value={selectedBrand}
-              values={brands}
-              onChange={(value) => handleBrandSelect(value)}
-              placeholder="Название бренда"
-              className="brandSelector"
+    <div className="FiltersContainer">
+      <div className="filtersForm">
+        <div className="filters">
+          <div className="nameInputContainer">
+            <SearchInput
+              value={selectedName}
+              onChange={(value) => handleNameInput(value)}
+              className="nameInput"
+              placeholder="Поиск по названию"
             />
           </div>
-          <div className="priceInputContainer">
-            <RangeInput
-              values={prices}
-              min={0}
-              max={prices.length - 1}
-              selectedItem={selectedPrice}
-              onChange={handlePriceSelect}
-              placeholder={"Введите цену"}
-            />
+          <div className="filtersContainer">
+            <div className="brandInputContainer">
+              <SelectorInput
+                value={selectedBrand}
+                values={brands}
+                onChange={(value) => handleBrandSelect(value)}
+                placeholder="Название бренда"
+                className="brandSelector"
+              />
+            </div>
+            <div className="priceInputContainer">
+              <RangeInput
+                values={prices}
+                min={0}
+                max={prices.length - 1}
+                selectedItem={selectedPrice}
+                onChange={handlePriceSelect}
+                placeholder={"Введите цену"}
+              />
+            </div>
           </div>
         </div>
-      </div>
-      <div className="btnContainer">
-        <Button onClick={handleProductsFilter}>Применить</Button>
+        <div className="btnContainer">
+          <Button onClick={handleProductsFilter}>Применить</Button>
+        </div>
       </div>
     </div>
   );
