@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import "./SelectorInput.scss";
 import useOnClickOutside from "hooks/useOnClickOutside";
 import { CleanIcon, DropDown, DropUp } from "shared/assets/icons/icons";
+import "./SelectorInput.scss";
 
 interface SelectorInputProps {
   className?: string;
@@ -35,6 +35,7 @@ const SelectorInput = (props: SelectorInputProps) => {
       setFilterValues(Object.values(values));
     }
   }, [value]);
+  
   const onListClose = () => {
     setIsListOpen(false);
   };
@@ -48,7 +49,7 @@ const SelectorInput = (props: SelectorInputProps) => {
   const onClean = () => {
     onChange?.("");
   };
-  
+
   return (
     <div className={`SelectorInput ${className}`} ref={selectorRef}>
       <div className="inputWrapper">

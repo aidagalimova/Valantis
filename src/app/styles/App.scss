@@ -1,9 +1,9 @@
 .App {
-  max-width: 2000px;
   padding: 16px 64px;
   min-height: 100vh;
   width: calc(100vw - 128px);
   overflow: hidden;
+  background-color: var(--bg-color);
   @media (max-width: 900px) {
     padding: 24px;
     width: calc(100vw - 48px);

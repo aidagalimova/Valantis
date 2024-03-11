@@ -1,4 +1,3 @@
-
 export interface Product {
   id: string;
   brand?: string;
@@ -17,8 +16,4 @@ export interface ProductSchema {
 
 export interface GetProductsResult {
   result: Product[];
-}
-
-export interface GetIdsResult {
-  result: number[];
 }

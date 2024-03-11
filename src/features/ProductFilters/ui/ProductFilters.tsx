@@ -1,20 +1,23 @@
-import { SearchInput, RangeInput, SelectorInput, Button } from "shared/ui";
-import "./ProductFilters.scss";
-import { useAppSelector } from "hooks/useAppSelector";
-import { RootState } from "app/store/store";
-import { useAppDispatch } from "hooks/useAppDispatch";
 import { useEffect, useState } from "react";
+import { useAppSelector } from "hooks/useAppSelector";
+import { useAppDispatch } from "hooks/useAppDispatch";
+import { RootState } from "app/store/store";
 import { fetchBrands } from "../model/services/fetchBrands";
-import { filterProducts } from "../model/services/filterProducts";
 import { fetchPrices } from "../model/services/fetchPrices";
-import { SelectedPrice } from "../types/productFilters";
 import { fetchProductIds } from "../model/services/fetchProductIds";
 import { setIsFiltered } from "../model/slices/slice";
+import { fetchFilterProductsIds } from "../model/services/fetchFilterProductsIds";
+import { SelectedPrice } from "../types/productFilters";
+import { SearchInput, RangeInput, SelectorInput, Button } from "shared/ui";
+import "./ProductFilters.scss";
+import { resetOffset } from "features/ProductPaginationList/model/slices/slice";
+
 const ProductFilters = () => {
   const { brands, prices } = useAppSelector(
     (state: RootState) => state.productFilters
   );
   const dispatch = useAppDispatch();
+
   const [selectedBrand, setSelectedBrand] = useState("");
   const [selectedPrice, setSelectedPrice] = useState<SelectedPrice | null>(
     null
@@ -39,12 +42,14 @@ const ProductFilters = () => {
   };
 
   const handleProductsFilter = () => {
+    dispatch(resetOffset());
+    //Если фильтры не выбраны запросить общий список
     if (!selectedBrand && !selectedName && !selectedPrice?.value) {
       dispatch(setIsFiltered(false));
       dispatch(fetchProductIds({ offset: 0, limit: 50 }));
     } else {
       dispatch(
-        filterProducts({
+        fetchFilterProductsIds({
           price: selectedPrice?.value || undefined,
           brand: selectedBrand || undefined,
           product: selectedName || undefined,

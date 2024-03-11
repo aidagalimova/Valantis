@@ -11,8 +11,11 @@ const productPaginationSlice = createSlice({
     setOffset: (state, action: PayloadAction<number>) => {
       state.offset += action.payload;
     },
+    resetOffset: (state) => {
+      state.offset = 0;
+    },
   },
 });
 
-export const { setOffset } = productPaginationSlice.actions;
+export const { setOffset, resetOffset } = productPaginationSlice.actions;
 export default productPaginationSlice.reducer;

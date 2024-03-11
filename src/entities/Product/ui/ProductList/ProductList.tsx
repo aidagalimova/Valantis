@@ -1,12 +1,11 @@
 import ProductCard from "../ProductCard/ProductCard";
-import "./ProductList.scss";
 import { Product } from "entities/Product/model/types/product";
+import "./ProductList.scss";
 
 interface ProductListProps {
   products?: Product[] | null;
 }
 const ProductList = (props: ProductListProps) => {
-
   const { products } = props;
   return (
     <div className={"ProductList"}>

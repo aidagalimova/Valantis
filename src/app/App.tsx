@@ -1,9 +1,10 @@
-import { CatalogPage } from "pages/catalog";
+import { useState } from "react";
 import { Provider } from "react-redux";
 import store from "./store/store";
-import "./styles/App.scss";
+import { CatalogPage } from "pages/catalog";
 import { ThemeSwitcher } from "shared/ui";
-import React, { useState } from "react";
+
+import "./styles/App.scss";
 
 function App() {
   const [theme, updateTheme] = useState("app_light_theme");
@@ -15,7 +16,7 @@ function App() {
       updateTheme("app_light_theme");
     }
   };
-  console.log(theme);
+
   return (
     <Provider store={store}>
       <div className={`App ${theme}`}>

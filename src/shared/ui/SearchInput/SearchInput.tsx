@@ -1,5 +1,6 @@
-import "./SearchInput.scss";
 import { CleanIcon, SearchIcon } from "shared/assets/icons/icons";
+import "./SearchInput.scss";
+
 interface SearchInputProps {
   className?: string;
   value?: string | number;

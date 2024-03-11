@@ -1,12 +1,15 @@
+import { Product } from "entities/Product/model/types/product";
+
 export interface ProductFiltersSchema {
   brands: { [key: string]: string } | null;
   prices: number[];
   ids: Set<number> | null;
-  offset: number;
-  limit: number;
   isLoading: boolean;
   isFiltered: boolean;
   error: string;
+  filteredProducts: {
+    [key: string]: Product;
+  } | null;
 }
 export interface GetFieldResult {
   result: (string | null)[];

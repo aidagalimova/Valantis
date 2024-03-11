@@ -1,23 +1,24 @@
 import { PayloadAction, createSlice, isAnyOf } from "@reduxjs/toolkit";
 import { fetchBrands } from "../services/fetchBrands";
+import { fetchPrices } from "../services/fetchPrices";
+import { fetchFilterProductsIds } from "../services/fetchFilterProductsIds";
+import { fetchProductIds } from "../services/fetchProductIds";
+import { fetchFilteredProducts } from "../services/fetchFilteredProducts";
+import { GetProductsResult } from "entities/Product/model/types/product";
 import {
   GetFieldResult,
   GetIdsResult,
   ProductFiltersSchema,
 } from "features/ProductFilters/types/productFilters";
-import { fetchPrices } from "../services/fetchPrices";
-import { filterProducts } from "../services/filterProducts";
-import { fetchProductIds } from "../services/fetchProductIds";
 
 const initialState: ProductFiltersSchema = {
   brands: null,
   prices: [],
   ids: null,
+  filteredProducts: null,
   isLoading: false,
   isFiltered: false,
   error: "",
-  offset: 0,
-  limit: 51,
 };
 
 const productFiltersSlice = createSlice({
@@ -49,16 +50,16 @@ const productFiltersSlice = createSlice({
         state.prices = [...new Set(prices)];
       }
     );
-    // GET FILTERED PRODUCTS
+    // GET FILTERED PRODUCTS IDS
     builder.addCase(
-      filterProducts.fulfilled,
+      fetchFilterProductsIds.fulfilled,
       (state, action: PayloadAction<GetIdsResult>) => {
-        state.isFiltered = true;
         state.ids = new Set(action.payload.result);
+        state.isFiltered = true;
       }
     );
 
-    builder.addCase(filterProducts.rejected, (state, action) => {
+    builder.addCase(fetchFilterProductsIds.rejected, (state, action) => {
       state.isLoading = false;
     });
     // GET ID
@@ -76,13 +77,33 @@ const productFiltersSlice = createSlice({
       state.isLoading = false;
     });
 
+    // GET FILTERED ITEMS
+    builder.addCase(
+      fetchFilteredProducts.fulfilled,
+      (state, action: PayloadAction<GetProductsResult>) => {
+        const res = action.payload.result.reduce(
+          (arr, value) => ({ ...arr, [value.id]: value }),
+          {}
+        );
+        state.filteredProducts = res;
+        state.isLoading = false;
+      }
+    );
+    builder.addCase(fetchFilteredProducts.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchFilteredProducts.rejected, (state, action) => {
+      state.isLoading = false;
+    });
+
     builder.addMatcher(
       isAnyOf(
         fetchProductIds.rejected,
         fetchBrands.rejected,
         fetchPrices.rejected,
-        filterProducts.rejected,
-        fetchProductIds.rejected
+        fetchProductIds.rejected,
+        fetchFilteredProducts.rejected,
+        fetchFilterProductsIds.rejected
       ),
       (state, action) => {
         console.log(action.error.message);

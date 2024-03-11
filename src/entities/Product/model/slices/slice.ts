@@ -18,14 +18,15 @@ const productSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    // GET ITEMS
+    // GET PRODUCTS
     builder.addCase(
       fetchProducts.fulfilled,
       (state, action: PayloadAction<GetProductsResult>) => {
-        state.products = action.payload.result.reduce(
+        const res = action.payload.result.reduce(
           (arr, value) => ({ ...arr, [value.id]: value }),
           {}
         );
+        state.products = { ...state.products, ...res };
         state.isLoading = false;
       }
     );

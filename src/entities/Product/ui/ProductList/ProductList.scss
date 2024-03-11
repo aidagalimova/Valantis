@@ -6,13 +6,13 @@
   gap: 16px;
   margin-bottom: 46px;
   overflow: auto;
-  height: calc(100vh - 242px);
+  max-height: calc(100vh - 258px);
   @media (max-width: 1081px) {
-    height: calc(100vh - 294px);
+    max-height: calc(100vh - 322px);
   }
   @media (max-width: 725px) {
     overflow: hidden;
-    height: unset;
+    max-height: unset;
   }
   .productListItem {
     flex-basis: 24%;

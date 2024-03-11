@@ -1,5 +1,6 @@
 @import "./themes/dark.scss";
 @import "./themes/light.scss";
+
 body {
   margin: 0;
   overflow: hidden;
@@ -10,13 +11,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 #root {
-  background-color: var(--bg-color);
   display: flex;
   justify-content: center;
   overflow: hidden;
-}
-.app_dark_theme {
-  background-color: var(--bg-color);
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",

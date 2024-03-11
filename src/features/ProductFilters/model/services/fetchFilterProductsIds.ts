@@ -5,10 +5,10 @@ import {
 } from "features/ProductFilters/types/productFilters";
 import axiosInstance from "shared/api/api";
 
-export const filterProducts = createAsyncThunk<
+export const fetchFilterProductsIds = createAsyncThunk<
   GetIdsResult,
   FilterRequest
->("filterProducts", async (filters) => {
+>("fetchFilterProductsIds", async (filters) => {
   const response = await axiosInstance.post("", {
     action: "filter",
     params: filters,
