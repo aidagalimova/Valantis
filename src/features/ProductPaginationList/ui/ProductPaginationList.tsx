@@ -39,9 +39,10 @@ const ProductPaginationList = () => {
   // Если запрос вернул ошибку, делаем новый запрос (необходимо по заданию)
   useEffect(() => {
     if (fetchProductIdsRejected) {
-      dispatch(fetchProductIds({ offset: 0, limit: 50 }));
+      dispatch(fetchProductIds({ offset, limit }));
     }
   }, [fetchProductIdsRejected]);
+
   useEffect(() => {
     if (fetchFilteredProductsRejected && ids && ids.size !== 0) {
       dispatch(fetchFilteredProducts(Array.from(ids)));
