@@ -47,6 +47,9 @@
   .FiltersContainer {
     .filtersForm {
       flex-direction: column;
+      .btnContainer {
+        text-align: -webkit-right;
+      }
     }
   }
 }
@@ -54,7 +57,11 @@
 @media (max-width: 590px) {
   .FiltersContainer {
     .filtersForm {
+      width: 100%;
       .filters {
+        .brandInputContainer {
+          width: 266px;
+        }
         .filtersContainer {
           flex-direction: column;
         }

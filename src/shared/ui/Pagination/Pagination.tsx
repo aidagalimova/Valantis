@@ -28,14 +28,14 @@ const Pagination = (props: PaginationProps) => {
       )}
       {isRight ? (
         <div className="moveBtn" onClick={onRight}>
-          <div>Следующая страница</div>
+          <div className="rightText">Следующая страница</div>
           <div>
             <ArrowRight />
           </div>
         </div>
       ) : (
         <div className="moveBtn disabled">
-          <div>Следующая страница</div>
+          <div className="rightText">Следующая страница</div>
           <div>
             <ArrowRight />
           </div>

@@ -20,12 +20,24 @@
     &:hover {
       opacity: 0.8;
     }
+    .rightText {
+      text-align: -webkit-right;
+    }
   }
   .disabled {
     opacity: 0.5;
     cursor: default;
     &:hover {
       opacity: 0.5;
+    }
+  }
+}
+
+@media (max-width: 470px) {
+  .Pagination {
+    justify-content: space-around;
+    .moveBtn {
+      width: min-content;
     }
   }
 }
