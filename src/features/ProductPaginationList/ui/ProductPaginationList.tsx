@@ -10,6 +10,7 @@ import { fetchProductIds } from "features/ProductFilters/model/services/fetchPro
 import { fetchFilteredProducts } from "features/ProductFilters/model/services/fetchFilteredProducts";
 import { Product } from "entities/Product/model/types/product";
 import { Loader, Pagination } from "shared/ui";
+import { clearFilteredProducts } from "features/ProductFilters/model/slices/slice";
 
 const ProductPaginationList = () => {
   const dispatch = useAppDispatch();
@@ -75,6 +76,7 @@ const ProductPaginationList = () => {
       }
     } else {
       dispatch(clearProducts());
+      dispatch(clearFilteredProducts());
     }
   }, [ids]);
 

@@ -31,6 +31,9 @@ const productFiltersSlice = createSlice({
     setIsFiltered: (state, action) => {
       state.isFiltered = action.payload;
     },
+    clearFilteredProducts: (state) => {
+      state.filteredProducts = {};
+    },
   },
   extraReducers: (builder) => {
     // GET BRANDS
@@ -123,5 +126,6 @@ const productFiltersSlice = createSlice({
   },
 });
 
-export const { setIsFiltered } = productFiltersSlice.actions;
+export const { setIsFiltered, clearFilteredProducts } =
+  productFiltersSlice.actions;
 export default productFiltersSlice.reducer;
