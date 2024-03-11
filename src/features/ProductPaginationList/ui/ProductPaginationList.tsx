@@ -18,9 +18,11 @@ const ProductPaginationList = () => {
     isLoading: isIdsLoading,
     isFiltered,
     filteredProducts,
+    fetchProductIdsRejected,
+    fetchFilteredProductsRejected,
   } = useAppSelector((state: RootState) => state.productFilters);
 
-  const { products, isLoading } = useAppSelector(
+  const { products, isLoading, fetchProductsRejected } = useAppSelector(
     (state: RootState) => state.product
   );
 
@@ -33,6 +35,23 @@ const ProductPaginationList = () => {
   useEffect(() => {
     dispatch(fetchProductIds({ offset, limit }));
   }, []);
+
+  // Если запрос вернул ошибку, делаем новый запрос (необходимо по заданию)
+  useEffect(() => {
+    if (fetchProductIdsRejected) {
+      dispatch(fetchProductIds({ offset: 0, limit: 50 }));
+    }
+  }, [fetchProductIdsRejected]);
+  useEffect(() => {
+    if (fetchFilteredProductsRejected && ids && ids.size !== 0) {
+      dispatch(fetchFilteredProducts(Array.from(ids)));
+    }
+  }, [fetchFilteredProductsRejected]);
+  useEffect(() => {
+    if (fetchProductsRejected && ids && ids.size !== 0) {
+      dispatch(fetchProducts(Array.from(ids)));
+    }
+  }, [fetchProductsRejected]);
 
   //Выбрать товары из общего списка
   useEffect(() => {

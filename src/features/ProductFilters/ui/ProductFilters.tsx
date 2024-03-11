@@ -13,7 +13,7 @@ import "./ProductFilters.scss";
 import { resetOffset } from "features/ProductPaginationList/model/slices/slice";
 
 const ProductFilters = () => {
-  const { brands, prices } = useAppSelector(
+  const { brands, prices, fetchFilterProductsIdsRejected } = useAppSelector(
     (state: RootState) => state.productFilters
   );
   const dispatch = useAppDispatch();
@@ -28,6 +28,19 @@ const ProductFilters = () => {
     dispatch(fetchPrices());
     dispatch(fetchBrands());
   }, []);
+
+  // Если запрос вернул ошибку, делаем новый запрос (необходимо по заданию)
+  useEffect(() => {
+    if (fetchFilterProductsIdsRejected) {
+      dispatch(
+        fetchFilterProductsIds({
+          price: selectedPrice?.value || undefined,
+          brand: selectedBrand || undefined,
+          product: selectedName || undefined,
+        })
+      );
+    }
+  }, [fetchFilterProductsIdsRejected]);
 
   const handleBrandSelect = (value: string) => {
     setSelectedBrand(value);

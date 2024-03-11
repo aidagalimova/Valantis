@@ -6,6 +6,7 @@ const initialState: ProductSchema = {
   ids: null,
   products: null,
   isLoading: false,
+  fetchProductsRejected: false,
   error: "",
 };
 
@@ -28,6 +29,7 @@ const productSlice = createSlice({
         );
         state.products = { ...state.products, ...res };
         state.isLoading = false;
+        state.fetchProductsRejected = false;
       }
     );
     builder.addCase(fetchProducts.pending, (state) => {
@@ -36,6 +38,7 @@ const productSlice = createSlice({
     builder.addCase(fetchProducts.rejected, (state, action) => {
       console.log(action.error.message);
       state.isLoading = false;
+      state.fetchProductsRejected = true;
     });
   },
 });

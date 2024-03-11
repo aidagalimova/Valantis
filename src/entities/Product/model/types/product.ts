@@ -12,6 +12,7 @@ export interface ProductSchema {
   } | null;
   isLoading: boolean;
   error: string;
+  fetchProductsRejected: boolean;
 }
 
 export interface GetProductsResult {

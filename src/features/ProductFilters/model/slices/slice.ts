@@ -19,6 +19,9 @@ const initialState: ProductFiltersSchema = {
   isLoading: false,
   isFiltered: false,
   error: "",
+  fetchFilterProductsIdsRejected: false,
+  fetchProductIdsRejected: false,
+  fetchFilteredProductsRejected: false,
 };
 
 const productFiltersSlice = createSlice({
@@ -56,18 +59,23 @@ const productFiltersSlice = createSlice({
       (state, action: PayloadAction<GetIdsResult>) => {
         state.ids = new Set(action.payload.result);
         state.isFiltered = true;
+        state.isLoading = false;
+        state.fetchFilterProductsIdsRejected = false;
       }
     );
 
-    builder.addCase(fetchFilterProductsIds.rejected, (state, action) => {
+    builder.addCase(fetchFilterProductsIds.rejected, (state) => {
       state.isLoading = false;
+      state.fetchFilterProductsIdsRejected = true;
     });
+
     // GET ID
     builder.addCase(
       fetchProductIds.fulfilled,
       (state, action: PayloadAction<GetIdsResult>) => {
         state.ids = new Set(action.payload.result);
         state.isLoading = false;
+        state.fetchProductIdsRejected = false;
       }
     );
     builder.addCase(fetchProductIds.pending, (state) => {
@@ -75,6 +83,7 @@ const productFiltersSlice = createSlice({
     });
     builder.addCase(fetchProductIds.rejected, (state) => {
       state.isLoading = false;
+      state.fetchProductIdsRejected = true;
     });
 
     // GET FILTERED ITEMS
@@ -87,13 +96,15 @@ const productFiltersSlice = createSlice({
         );
         state.filteredProducts = res;
         state.isLoading = false;
+        state.fetchFilteredProductsRejected = false;
       }
     );
     builder.addCase(fetchFilteredProducts.pending, (state) => {
       state.isLoading = true;
     });
-    builder.addCase(fetchFilteredProducts.rejected, (state, action) => {
+    builder.addCase(fetchFilteredProducts.rejected, (state) => {
       state.isLoading = false;
+      state.fetchFilteredProductsRejected = true;
     });
 
     builder.addMatcher(

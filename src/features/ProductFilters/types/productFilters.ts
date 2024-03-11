@@ -10,6 +10,9 @@ export interface ProductFiltersSchema {
   filteredProducts: {
     [key: string]: Product;
   } | null;
+  fetchFilterProductsIdsRejected: boolean;
+  fetchProductIdsRejected: boolean;
+  fetchFilteredProductsRejected: boolean;
 }
 export interface GetFieldResult {
   result: (string | null)[];
