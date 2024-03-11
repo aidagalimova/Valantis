@@ -22,6 +22,8 @@ const initialState: ProductFiltersSchema = {
   fetchFilterProductsIdsRejected: false,
   fetchProductIdsRejected: false,
   fetchFilteredProductsRejected: false,
+  fetchPricesRejected: false,
+  fetchBrandsRejected: false,
 };
 
 const productFiltersSlice = createSlice({
@@ -40,15 +42,26 @@ const productFiltersSlice = createSlice({
     builder.addCase(
       fetchBrands.fulfilled,
       (state, action: PayloadAction<GetFieldResult>) => {
+        state.fetchBrandsRejected = false;
         state.brands = action.payload.result
           .filter((x: string | null): x is string => x != null)
           .reduce((arr, value) => ({ ...arr, [value]: value }), {});
       }
     );
+
+    builder.addCase(fetchBrands.pending, (state) => {
+      state.fetchBrandsRejected = false;
+    });
+
+    builder.addCase(fetchBrands.rejected, (state) => {
+      state.fetchBrandsRejected = true;
+    });
+
     // GET PRICES
     builder.addCase(
       fetchPrices.fulfilled,
       (state, action: PayloadAction<GetFieldResult>) => {
+        state.fetchPricesRejected = false;
         const prices = action.payload.result
           .filter((x: string | null): x is string => x != null)
           .map((el) => parseFloat(el))
@@ -56,6 +69,14 @@ const productFiltersSlice = createSlice({
         state.prices = [...new Set(prices)];
       }
     );
+    builder.addCase(fetchPrices.pending, (state) => {
+      state.fetchPricesRejected = false;
+    });
+
+    builder.addCase(fetchPrices.rejected, (state) => {
+      state.fetchPricesRejected = true;
+    });
+
     // GET FILTERED PRODUCTS IDS
     builder.addCase(
       fetchFilterProductsIds.fulfilled,
@@ -66,6 +87,10 @@ const productFiltersSlice = createSlice({
         state.fetchFilterProductsIdsRejected = false;
       }
     );
+
+    builder.addCase(fetchFilterProductsIds.pending, (state) => {
+      state.fetchFilterProductsIdsRejected = false;
+    });
 
     builder.addCase(fetchFilterProductsIds.rejected, (state) => {
       state.isLoading = false;
@@ -83,6 +108,7 @@ const productFiltersSlice = createSlice({
     );
     builder.addCase(fetchProductIds.pending, (state) => {
       state.isLoading = true;
+      state.fetchProductIdsRejected = false;
     });
     builder.addCase(fetchProductIds.rejected, (state) => {
       state.isLoading = false;
@@ -104,6 +130,7 @@ const productFiltersSlice = createSlice({
     );
     builder.addCase(fetchFilteredProducts.pending, (state) => {
       state.isLoading = true;
+      state.fetchFilteredProductsRejected = false;
     });
     builder.addCase(fetchFilteredProducts.rejected, (state) => {
       state.isLoading = false;

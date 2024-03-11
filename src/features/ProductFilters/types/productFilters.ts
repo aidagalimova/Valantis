@@ -13,6 +13,8 @@ export interface ProductFiltersSchema {
   fetchFilterProductsIdsRejected: boolean;
   fetchProductIdsRejected: boolean;
   fetchFilteredProductsRejected: boolean;
+  fetchPricesRejected: boolean;
+  fetchBrandsRejected: boolean;
 }
 export interface GetFieldResult {
   result: (string | null)[];

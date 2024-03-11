@@ -13,9 +13,13 @@ import "./ProductFilters.scss";
 import { resetOffset } from "features/ProductPaginationList/model/slices/slice";
 
 const ProductFilters = () => {
-  const { brands, prices, fetchFilterProductsIdsRejected } = useAppSelector(
-    (state: RootState) => state.productFilters
-  );
+  const {
+    brands,
+    prices,
+    fetchFilterProductsIdsRejected,
+    fetchBrandsRejected,
+    fetchPricesRejected,
+  } = useAppSelector((state: RootState) => state.productFilters);
   const dispatch = useAppDispatch();
 
   const [selectedBrand, setSelectedBrand] = useState("");
@@ -41,6 +45,16 @@ const ProductFilters = () => {
       );
     }
   }, [fetchFilterProductsIdsRejected]);
+  useEffect(() => {
+    if (fetchPricesRejected) {
+      dispatch(fetchPrices());
+    }
+  }, [fetchPricesRejected]);
+  useEffect(() => {
+    if (fetchBrandsRejected) {
+      dispatch(fetchBrands());
+    }
+  }, [fetchBrandsRejected]);
 
   const handleBrandSelect = (value: string) => {
     setSelectedBrand(value);
