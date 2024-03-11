@@ -59,7 +59,7 @@ const ProductFilters = () => {
     //Если фильтры не выбраны запросить общий список
     if (!selectedBrand && !selectedName && !selectedPrice?.value) {
       dispatch(setIsFiltered(false));
-      dispatch(fetchProductIds({ offset: 0, limit: 50 }));
+      dispatch(fetchProductIds({ offset: 0, limit: 100 }));
     } else {
       dispatch(
         fetchFilterProductsIds({
